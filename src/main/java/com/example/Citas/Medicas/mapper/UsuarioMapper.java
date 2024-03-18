@@ -9,6 +9,17 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UsuarioMapper {
 
+    //Metodo que realiza el cambio de Entidad a Dto de usuario
+    @Mapping( source = "id", target = "id")
+    UsuarioDto ModelToDTO( UsuarioModel usuarioModel);
 
+    //Metodo que realiza el cambio de Dto a Entidad de usuario
+    @InheritInverseConfiguration
+    UsuarioModel DtoToModel(UsuarioDto usuarioDto);
 
+    //Metodo que realiza el cambio de  lista de Entidades a  lista de Dto's de usuario
+    List<UsuarioDto> ListaModelToListaDto (List<UsuarioModel> usuarioModelList);
+
+    //Metodo que realiza el cambio de lista de Dto's  a lista de Entidades  de usuario
+    List<UsuarioModel> ListaDtoToListaModel (List<UsuarioDto> usuarioDtoList);
 }

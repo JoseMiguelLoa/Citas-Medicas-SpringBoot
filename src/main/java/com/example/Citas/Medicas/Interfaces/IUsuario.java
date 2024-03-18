@@ -1,12 +1,13 @@
 package com.example.Citas.Medicas.Interfaces;
 
+import com.example.Citas.Medicas.dtos.UsuarioDto;
 import com.example.Citas.Medicas.models.UsuarioModel;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public interface IUsuario {
-    ArrayList<UsuarioModel> getUsuarios();
+    List<UsuarioDto> getUsuarios();
 
     UsuarioModel saveUsuario(UsuarioModel usuario);
 

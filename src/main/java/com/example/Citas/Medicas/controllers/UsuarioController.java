@@ -1,11 +1,12 @@
 package com.example.Citas.Medicas.controllers;
 
+import com.example.Citas.Medicas.dtos.UsuarioDto;
 import com.example.Citas.Medicas.models.UsuarioModel;
 import com.example.Citas.Medicas.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,7 +20,7 @@ public class UsuarioController {
     //Método que realiza la búsqueda de todos los usuarios en la base de datos
     //Esta anotación se utiliza para mapear solicitudes HTTP GET.
     @GetMapping
-    public ArrayList<UsuarioModel> getUsuarios(){
+    public List<UsuarioDto> getUsuarios(){
         return this.usuarioService.getUsuarios();
     }
 

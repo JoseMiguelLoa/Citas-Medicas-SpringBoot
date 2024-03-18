@@ -1,12 +1,14 @@
 package com.example.Citas.Medicas.services;
 
 import com.example.Citas.Medicas.Interfaces.IUsuario;
+import com.example.Citas.Medicas.dtos.UsuarioDto;
+import com.example.Citas.Medicas.mapper.UsuarioMapper;
 import com.example.Citas.Medicas.models.UsuarioModel;
 import com.example.Citas.Medicas.repositories.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 //Clase donde se realizan todas los métodos de la tabla usuario
@@ -16,17 +18,21 @@ public class UsuarioService implements IUsuario {
     @Autowired  //Inyección de dependencias
     IUsuarioRepository usuarioRepository; //Uso del repositorio donde se almacenan los usuarios
 
+    @Autowired
+    private UsuarioMapper usuarioMapper; // Variable del mapper
+
     /**
      * Método que realiza la búsqueda de todos los usuarios en la base de datos
      * @return Lista de usuarios
      */
-    public ArrayList<UsuarioModel> getUsuarios(){
-        return (ArrayList<UsuarioModel>) usuarioRepository.findAll();
+    public List<UsuarioDto> getUsuarios() {
+        List<UsuarioModel> usuarios = usuarioRepository.findAll();
+        return usuarioMapper.ListaModelToListaDto(usuarios);
     }
 
     /**
      * Método que realiza el guardado de un usuario pasado por parámetro
-     * @param usuario (UsuarioModel ) los datos del usuario
+     * @param usuario (UsuarioDto ) los datos del usuario
      * @return El usuario guardado
      */
     public UsuarioModel saveUsuario(UsuarioModel usuario){

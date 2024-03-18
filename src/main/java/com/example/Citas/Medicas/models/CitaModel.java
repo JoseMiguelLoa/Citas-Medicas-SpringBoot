@@ -15,7 +15,7 @@ public class CitaModel {
 
 
     @Id//Identificador primario
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Genera un valor automaticamente para la clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Genera un valor automáticamente para la clave primaria
     private Long id; //ID de la cita
 
 
@@ -31,10 +31,9 @@ public class CitaModel {
     private int attribute11; //??
 
 
-    // Realizamos la relaciones de muchos a uno de la tabla paciente , medico y diagnostico
-
+    // Realizamos las relaciones de muchos a uno de la tabla paciente, médico y diagnóstico
     @ManyToOne
-    @JoinColumn(name = "pacinete_id")
+    @JoinColumn(name = "paciente_id")
     private PacienteModel paciente;
 
 
@@ -44,8 +43,8 @@ public class CitaModel {
     private MedicoModel medico;
 
 
-    @OneToOne
-    @JoinColumn(name = "diagnostico_id", referencedColumnName = "id")
+    @OneToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "diagnostico_id", referencedColumnName = "id" )
     private DiagnosticoModel diagnostico;
 
 }

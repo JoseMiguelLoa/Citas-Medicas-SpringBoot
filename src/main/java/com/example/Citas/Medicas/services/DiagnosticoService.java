@@ -1,53 +1,66 @@
 package com.example.Citas.Medicas.services;
 
 import com.example.Citas.Medicas.Interfaces.IDiagnostico;
+import com.example.Citas.Medicas.dtos.DiagnosticoDto;
+import com.example.Citas.Medicas.mapper.DiagnosticoMapper;
 import com.example.Citas.Medicas.models.DiagnosticoModel;
 import com.example.Citas.Medicas.repositories.IDiagnosticoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class DiagnosticoService implements IDiagnostico {
     @Autowired  //Inyección de dependencias
-    IDiagnosticoRepository diagnosticoRepository; //Uso del repositorio donde se almacenan los diagnosticos
+    IDiagnosticoRepository diagnosticoRepository; //Uso del repositorio donde se almacenan los diagnósticos
+
+    @Autowired
+    private DiagnosticoMapper diagnosticoMapper; // Variable del mapper
 
     /**
      * Método que realiza la búsqueda de todos los diagnósticos en la base de datos
      * @return Lista de diagnósticos
      */
-    public ArrayList<DiagnosticoModel> getDiagnostico(){
-        return (ArrayList<DiagnosticoModel>) diagnosticoRepository.findAll();
+    public List<DiagnosticoDto> getDiagnostico(){
+        List<DiagnosticoModel> diagnostico = diagnosticoRepository.findAll();
+        return diagnosticoMapper.ListaModelToListaDto(diagnostico);
     }
 
     /**
      * Método que realiza el guardado de un diagnóstico pasado por parámetro
      * @param diagnostico (DiagnosticoModel) los datos del diagnóstico
-     * @return El diagnóstico  guardado
+     * @return El diagnóstico guardado
      */
-    public DiagnosticoModel saveDiagnostico(DiagnosticoModel diagnostico){
-        return diagnosticoRepository.save(diagnostico);
+    public DiagnosticoDto saveDiagnostico(DiagnosticoModel diagnostico){
+        return diagnosticoMapper.ModelToDTO(diagnosticoRepository.save(diagnostico));
     }
 
     /**
      * Método que realiza la búsqueda de un diagnóstico que tenga la misma id pasada por parámetro
      * @param id (Long) Id del diagnóstico
-     * @return El diagnóstico con la id pasada por parámetro
+     * @return El diagnóstico con id pasada por parámetro
      */
-    public Optional<DiagnosticoModel> getById(Long id){
-        return diagnosticoRepository.findById(id);
+    public Optional<DiagnosticoDto> getById(Long id){
+        DiagnosticoModel diagnostico ;
+        if (diagnosticoRepository.findById(id).isPresent())
+            diagnostico =  diagnosticoRepository.findById(id).get();
+        else
+            diagnostico = null;
+
+        DiagnosticoDto diagnosticoDto = diagnosticoMapper.ModelToDTO(diagnostico);
+        return Optional.ofNullable(diagnosticoDto);
     }
 
 
     /**
-     * Método que realiza la actualización de los campos que se hayan pasado más el id para definir que diagnóstico es
-     * @param request (DiagnosticoModel)  Datos que se quieren cambiar
+     * Método que realiza la actualización de los campos que se hayan pasado más id para definir que diagnóstico es
+     * @param request (DiagnosticoModel) Datos que se quieren cambiar
      * @param id (Long) Id del diagnóstico
      * @return El diagnóstico que se ha modificado
      */
-    public DiagnosticoModel updateById(DiagnosticoModel request , Long id){
+    public DiagnosticoDto updateById(DiagnosticoModel request , Long id){
         DiagnosticoModel diagnostico = diagnosticoRepository.findById(id).get();
 
         if (request.getValoracionEspecialista() != null)
@@ -58,20 +71,23 @@ public class DiagnosticoService implements IDiagnostico {
 
 
         diagnostico = diagnosticoRepository.save(diagnostico);
-        return diagnostico;
+        return diagnosticoMapper.ModelToDTO(diagnostico);
     }
 
     /**
      * Borra el usuario pasado por parámetro
-     * @param id (Long) Id del paciente
+     * @param id (Long) Id del diagnostico
      * @return True en caso de que se haya podido realizar el borrado de esa persona, False en caso no se haya podido realizar el borrado
      */
     public Boolean deleteDiagnostico (Long id){
-        try{
-            diagnosticoRepository.deleteById(id);
-            return true;
-        }catch (Exception e){
+        if (diagnosticoRepository.findById(id).isPresent()){
+            try{
+                diagnosticoRepository.deleteById(id);
+                return true;
+            }catch (Exception e){
+                return false;
+            }
+        }else
             return false;
-        }
     }
 }

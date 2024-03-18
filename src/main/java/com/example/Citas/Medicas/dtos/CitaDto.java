@@ -1,8 +1,6 @@
 package com.example.Citas.Medicas.dtos;
 
-import com.example.Citas.Medicas.models.DiagnosticoModel;
-import com.example.Citas.Medicas.models.MedicoModel;
-import com.example.Citas.Medicas.models.PacienteModel;
+
 import lombok.*;
 
 import java.util.Date;
@@ -21,10 +19,10 @@ public class CitaDto {
 
     private int attribute11; //??
 
-    // Realizamos la relaciones de muchos a uno de la tabla paciente , medico y  de uno a uno con  la tabla diagnostico
-    private PacienteModel paciente;
+    // Realizamos las relaciones de muchos a uno de la tabla paciente, médico y de uno a uno con la tabla diagnóstico
+    private Long paciente_id;
 
-    private MedicoModel medico;
+    private Long medico_id;
 
-    private DiagnosticoModel diagnostico;
+    private Long diagnostico_id;
 }

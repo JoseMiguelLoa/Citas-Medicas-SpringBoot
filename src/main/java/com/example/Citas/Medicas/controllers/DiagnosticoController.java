@@ -1,15 +1,16 @@
 package com.example.Citas.Medicas.controllers;
 
+import com.example.Citas.Medicas.dtos.DiagnosticoDto;
 import com.example.Citas.Medicas.models.DiagnosticoModel;
 import com.example.Citas.Medicas.services.DiagnosticoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Diagnostico") //Introducimos una ruta para las métodos
+@RequestMapping("/Diagnostico") //Introducimos una ruta para los métodos
 public class DiagnosticoController {
 
     @Autowired //Inyección de dependencias
@@ -18,7 +19,7 @@ public class DiagnosticoController {
     //Método que realiza la búsqueda de todos los diagnóstico en la base de datos
     //Esta anotación se utiliza para mapear solicitudes HTTP GET.
     @GetMapping
-    public ArrayList<DiagnosticoModel> getDiagnosticos(){
+    public List<DiagnosticoDto> getDiagnosticos(){
         return this.diagnosticoService.getDiagnostico();
     }
 
@@ -26,13 +27,13 @@ public class DiagnosticoController {
     //Método que realiza el guardado de un diagnóstico pasado por parámetro
     //Esta anotación se utiliza para mapear solicitudes HTTP POST.
     @PostMapping
-    public DiagnosticoModel saveDiagnostico(@RequestBody DiagnosticoModel diagnostico){
+    public DiagnosticoDto saveDiagnostico(@RequestBody DiagnosticoModel diagnostico){
         return this.diagnosticoService.saveDiagnostico(diagnostico);
     }
 
     //  Método que realiza la búsqueda de un diagnóstico que tenga la misma id pasada por parámetro
     @GetMapping(path = "/{id}")
-    public Optional<DiagnosticoModel> getDiagnosticoById(@PathVariable Long id){
+    public Optional<DiagnosticoDto> getDiagnosticoById(@PathVariable Long id){
 
         return this.diagnosticoService.getById(id);
     }
@@ -40,7 +41,7 @@ public class DiagnosticoController {
 
     // Método que realiza la actualización de los campos que se hayan pasado más el id para definir que diagnóstico es
     @PutMapping(path = "/{id}")
-    public DiagnosticoModel updateDiagnosticoById(@RequestBody DiagnosticoModel request, @PathVariable("id") Long id){
+    public DiagnosticoDto updateDiagnosticoById(@RequestBody DiagnosticoModel request, @PathVariable("id") Long id){
         return this.diagnosticoService.updateById(request, id);
     }
 

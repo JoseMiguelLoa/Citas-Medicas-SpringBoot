@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Usuario") //Introducimos una ruta para las métodos
+@RequestMapping("/Usuario") //Introducimos una ruta para los métodos
 public class UsuarioController {
     @Autowired //Inyección de dependencias
     private UsuarioService usuarioService;
@@ -28,21 +28,20 @@ public class UsuarioController {
     //Método que realiza el guardado de un usuario pasado por parámetro
     //Esta anotación se utiliza para mapear solicitudes HTTP POST.
     @PostMapping
-    public UsuarioModel saveUsuario(@RequestBody UsuarioModel usuario){
+    public UsuarioDto saveUsuario(@RequestBody UsuarioModel usuario){
         return this.usuarioService.saveUsuario(usuario);
     }
 
 
     //  Método que realiza la búsqueda de un usuario que tenga la misma id pasada por parámetro
     @GetMapping(path = "/{id}")
-    public Optional<UsuarioModel> getUsuarioById(@PathVariable Long id){
-
+    public Optional<UsuarioDto> getUsuarioById(@PathVariable Long id){
         return this.usuarioService.getById(id);
     }
 
     // Método que realiza la actualización de los campos que se hayan pasado más el id para definir que usuario es
     @PutMapping(path = "/{id}")
-    public UsuarioModel updateUsuarioById(@RequestBody UsuarioModel request, @PathVariable("id") Long id){
+    public UsuarioDto updateUsuarioById(@RequestBody UsuarioModel request, @PathVariable("id") Long id){
         return this.usuarioService.updateById(request, id);
     }
 

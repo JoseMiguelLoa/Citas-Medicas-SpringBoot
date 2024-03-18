@@ -32,46 +32,63 @@ public class UsuarioService implements IUsuario {
 
     /**
      * Método que realiza el guardado de un usuario pasado por parámetro
-     * @param usuario (UsuarioDto ) los datos del usuario
+     * @param usuario (UsuarioDto) los datos del usuario
      * @return El usuario guardado
      */
-    public UsuarioModel saveUsuario(UsuarioModel usuario){
-        return usuarioRepository.save(usuario);
+    public UsuarioDto saveUsuario(UsuarioModel usuario){
+        // Convertir el UsuarioDto a UsuarioModel utilizando el mapper
+
+        return usuarioMapper.ModelToDTO(usuarioRepository.save(usuario));
     }
 
     /**
      * Método que realiza la búsqueda de un usuario que tenga la misma id pasada por parámetro
+     *
      * @param id (Long) Id del usuario
      * @return el usuario con la id pasada por parámetro
      */
-    public Optional<UsuarioModel> getById(Long id){
-        return usuarioRepository.findById(id);
+    public Optional<UsuarioDto> getById(Long id){
+        UsuarioModel usuario;
+        if (usuarioRepository.findById(id).isPresent())
+             usuario =  usuarioRepository.findById(id).get();
+        else
+            usuario = null;
+
+        UsuarioDto usuarioDto = usuarioMapper.ModelToDTO(usuario);
+        return Optional.ofNullable(usuarioDto);
     }
 
 
     /**
      * Método que realiza la actualización de los campos que se hayan pasado más el id para definir que usuario es
-     * @param request (UsuarioModel)  Datos que se quieren cambiar
+     * @param request (UsuarioModel) Datos que se quieren cambiar
      * @param id (Long) Id del usuario
      * @return el usuario que se ha modificado
      */
-    public UsuarioModel updateById(UsuarioModel request , Long id){
-        UsuarioModel usuario = usuarioRepository.findById(id).get();
+    public UsuarioDto updateById(UsuarioModel request , Long id){
+        UsuarioModel usuario;
+        if ( usuarioRepository.findById(id).isPresent()){
 
-        if (request.getNombre() != null)
-            usuario.setNombre(request.getNombre());
+                usuario = usuarioRepository.findById(id).get();
 
-        if (request.getApellidos() != null)
-            usuario.setApellidos(request.getApellidos());
+            if (request.getNombre() != null)
+                usuario.setNombre(request.getNombre());
 
-        if (request.getUsuario() != null)
-            usuario.setUsuario(request.getUsuario());
+            if (request.getApellidos() != null)
+                usuario.setApellidos(request.getApellidos());
 
-        if (request.getClave() != null)
-            usuario.setClave(request.getClave());
+            if (request.getUsuario() != null)
+                usuario.setUsuario(request.getUsuario());
 
-        usuario = usuarioRepository.save(usuario);
-        return usuario;
+            if (request.getClave() != null)
+                usuario.setClave(request.getClave());
+
+            usuario = usuarioRepository.save(usuario);
+        }else
+            usuario = null;
+
+
+        return   usuarioMapper.ModelToDTO(usuario);
     }
 
 
@@ -81,12 +98,15 @@ public class UsuarioService implements IUsuario {
      * @return True en caso de que se haya podido realizar el borrado de esa persona, False en caso no se haya podido realizar el borrado
      */
     public Boolean deleteUsuario (Long id){
-        try{
-            usuarioRepository.deleteById(id);
-            return true;
-        }catch (Exception e){
+        if (usuarioRepository.findById(id).isPresent()){
+            try{
+                usuarioRepository.deleteById(id);
+                return true;
+            }catch (Exception e){
+                return false;
+            }
+        }else
             return false;
-        }
     }
 
 

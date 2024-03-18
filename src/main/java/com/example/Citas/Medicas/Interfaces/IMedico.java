@@ -1,20 +1,24 @@
 package com.example.Citas.Medicas.Interfaces;
 
+import com.example.Citas.Medicas.dtos.MedicoDto;
+import com.example.Citas.Medicas.dtos.PacienteDto;
 import com.example.Citas.Medicas.models.MedicoModel;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public interface IMedico {
 
-    ArrayList<MedicoModel> getMedicos();
+    List<MedicoDto> getMedicos();
 
-    MedicoModel saveMedico(MedicoModel medico);
+    MedicoDto saveMedico(MedicoModel medico);
 
-    Optional<MedicoModel> getById(Long id);
+    Optional<MedicoDto> getById(Long id);
 
-    MedicoModel updateById(MedicoModel request , Long id);
+    MedicoDto updateById(MedicoModel request , Long id);
 
     Boolean deleteMedico (Long id);
+
+    List<PacienteDto> ListaDePacientesMedico(Long id);
 
 }

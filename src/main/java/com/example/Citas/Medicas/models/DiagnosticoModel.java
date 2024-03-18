@@ -10,10 +10,10 @@ import lombok.*;
 @Entity
 @Table(name = "Diagnostico")
 public class DiagnosticoModel  {
-    //Declaración de las variables que serán las columnas de la tabla diagnostico y sus getter y setters gracias a lombok
+    //Declaración de las variables que serán las columnas de la tabla diagnóstico y sus getter y setters gracias a lombok
 
     @Id //Identificador primario
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Genera un valor automaticamente para la clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Genera un valor automáticamente para la clave primaria
     private Long id; //ID del diagnóstico
 
 
@@ -25,6 +25,6 @@ public class DiagnosticoModel  {
     private String enfermedad;
 
 
-    @OneToOne(mappedBy = "diagnostico", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "diagnostico")
     private CitaModel cita;
 }

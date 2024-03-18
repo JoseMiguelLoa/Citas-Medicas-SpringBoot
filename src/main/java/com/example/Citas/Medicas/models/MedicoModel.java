@@ -14,7 +14,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(referencedColumnName = "id", name="idU")
 @Table(name = "Medico")
 public class MedicoModel extends UsuarioModel{
-    //Declaración de las variables que serán las columnas de la tabla medico y sus getter y setters gracias a lombok
+    //Declaración de las variables que serán las columnas de la tabla médico y sus getter y setters gracias a lombok
     @Column(unique = true)
     private String numColegiado;
 

@@ -15,7 +15,7 @@ public class UsuarioModel {
     //Declaración de las variables que serán las columnas de la tabla usuario y sus getter y setters gracias a lombok
 
     @Id //Identificador primario
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Genera un valor automaticamente para la clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Genera un valor automáticamente para la clave primaria
     private Long id; //ID del usuario
 
 

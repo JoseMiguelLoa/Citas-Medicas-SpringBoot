@@ -1,18 +1,19 @@
 package com.example.Citas.Medicas.Interfaces;
 
+import com.example.Citas.Medicas.dtos.DiagnosticoDto;
 import com.example.Citas.Medicas.models.DiagnosticoModel;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public interface IDiagnostico {
-    ArrayList<DiagnosticoModel> getDiagnostico();
+    List<DiagnosticoDto> getDiagnostico();
 
-    DiagnosticoModel saveDiagnostico(DiagnosticoModel diagnostico);
+    DiagnosticoDto saveDiagnostico(DiagnosticoModel diagnostico);
 
-    Optional<DiagnosticoModel> getById(Long id);
+    Optional<DiagnosticoDto> getById(Long id);
 
-    DiagnosticoModel updateById(DiagnosticoModel request , Long id);
+    DiagnosticoDto updateById(DiagnosticoModel request , Long id);
 
     Boolean deleteDiagnostico (Long id);
 }

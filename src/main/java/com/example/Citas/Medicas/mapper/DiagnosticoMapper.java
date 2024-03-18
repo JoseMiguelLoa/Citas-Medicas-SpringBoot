@@ -12,18 +12,18 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface DiagnosticoMapper {
 
-    //Metodo que realiza el cambio de Entidad a Dto de Diagnostico
+    //Método que realiza el cambio de Entidad a Dto de Diagnóstico
     @Mapping( source = "id", target = "id")
     DiagnosticoDto ModelToDTO(DiagnosticoModel diagnosticoModel);
 
-    //Metodo que realiza el cambio de Dto a Entidad de Diagnostico
+    //Método que realiza el cambio de Dto a Entidad de Diagnóstico
     @InheritInverseConfiguration
     DiagnosticoModel DtoToModel(DiagnosticoDto diagnosticoDto);
 
-    //Metodo que realiza el cambio de  lista de Entidades a  lista de Dto's de Diagnostico
+    //Método que realiza el cambio de lista de Entidades a lista de Dto's de Diagnóstico
     List<DiagnosticoDto> ListaModelToListaDto (List<DiagnosticoModel> diagnosticoModelList);
 
-    //Metodo que realiza el cambio de lista de Dto's  a lista de Entidades  de Diagnostico
+    //Método que realiza el cambio de lista de Dto's a lista de Entidades de Diagnóstico
     List<DiagnosticoModel> ListaDtoToListaModel (List<DiagnosticoDto> diagnosticoDtoList);
 
 }

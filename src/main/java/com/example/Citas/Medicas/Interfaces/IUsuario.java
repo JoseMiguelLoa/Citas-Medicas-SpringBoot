@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface IUsuario {
     List<UsuarioDto> getUsuarios();
 
-    UsuarioModel saveUsuario(UsuarioModel usuario);
+    UsuarioDto saveUsuario(UsuarioModel usuario);
 
-    Optional<UsuarioModel> getById(Long id);
+    Optional<UsuarioDto> getById(Long id);
 
-    UsuarioModel updateById(UsuarioModel request , Long id);
+    UsuarioDto updateById(UsuarioModel request , Long id);
 
     Boolean deleteUsuario (Long id);
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 
 //Clase de la tabla Pacientes
-@EqualsAndHashCode(callSuper = true)// El equals y el hashcode lo obtiene/hereda de la clase padre  usuario
+@EqualsAndHashCode(callSuper = true)// El equals y el hashcode lo obtiene/hereda de la clase padre usuario
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

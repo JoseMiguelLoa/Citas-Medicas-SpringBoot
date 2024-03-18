@@ -13,18 +13,18 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING )
 public interface MedicoMapper {
 
-    //Metodo que realiza el cambio de Entidad a Dto de Medico
+    //Método que realiza el cambio de Entidad a Dto de Médico
     @Mapping( source = "id", target = "id")
     MedicoDto ModelToDTO(MedicoModel medicoModel);
 
-    //Metodo que realiza el cambio de Dto a Entidad de Medico
+    //Método que realiza el cambio de Dto a Entidad de Médico
     @InheritInverseConfiguration
     MedicoModel DtoToModel(MedicoDto medicoDto);
 
-    //Metodo que realiza el cambio de  lista de Entidades a  lista de Dto's de Medico
+    //Método que realiza el cambio de lista de Entidades a lista de Dto's de Médico
     List<MedicoDto> ListaModelToListaDto (List<MedicoModel> medicoModelList);
 
-    //Metodo que realiza el cambio de lista de Dto's  a lista de Entidades  de Medico
+    //Método que realiza el cambio de lista de Dto's a lista de Entidades de Médico
     List<MedicoModel> ListaDtoToListaModel (List<MedicoDto> medicoDtoList);
 }
 

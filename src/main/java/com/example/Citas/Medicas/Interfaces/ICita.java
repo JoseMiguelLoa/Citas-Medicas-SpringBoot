@@ -1,19 +1,20 @@
 package com.example.Citas.Medicas.Interfaces;
 
+import com.example.Citas.Medicas.dtos.CitaDto;
 import com.example.Citas.Medicas.models.CitaModel;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public interface ICita {
 
-    ArrayList<CitaModel> getCitas();
+    List<CitaDto> getCitas();
 
-    CitaModel saveCita(CitaModel cita);
+    CitaDto saveCita(CitaDto cita);
 
-    Optional<CitaModel> getById(Long id);
+    Optional<CitaDto> getById(Long id);
 
-    CitaModel updateById(CitaModel request , Long id);
+    CitaDto updateById(CitaModel request , Long id);
 
     Boolean deleteCita (Long id);
 }

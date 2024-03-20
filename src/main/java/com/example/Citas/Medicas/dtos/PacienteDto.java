@@ -14,7 +14,7 @@ public class PacienteDto {
     private Long id;
 
 
-    private String NSS;
+    private String NSS;//Número de la seguridad social
 
 
     private  String numTarjeta;

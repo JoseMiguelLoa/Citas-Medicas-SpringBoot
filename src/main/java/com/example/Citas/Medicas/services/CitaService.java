@@ -128,7 +128,7 @@ public class CitaService implements ICita {
         if (request.getMotivoCita() != null)
             cita.setMotivoCita(request.getMotivoCita());
 
-        if (request.getAttribute11() > 0)
+        if (request.getAttribute11() > 0 )
             cita.setAttribute11(request.getAttribute11());
 
 

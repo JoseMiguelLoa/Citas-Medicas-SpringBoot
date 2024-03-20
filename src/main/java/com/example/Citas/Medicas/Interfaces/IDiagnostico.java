@@ -9,11 +9,14 @@ import java.util.Optional;
 public interface IDiagnostico {
     List<DiagnosticoDto> getDiagnostico();
 
-    DiagnosticoDto saveDiagnostico(DiagnosticoModel diagnostico);
+    DiagnosticoDto saveDiagnostico(DiagnosticoDto diagnostico);
 
     Optional<DiagnosticoDto> getById(Long id);
 
     DiagnosticoDto updateById(DiagnosticoModel request , Long id);
 
     Boolean deleteDiagnostico (Long id);
+
+
+
 }

@@ -14,7 +14,6 @@ public interface CitaMapper {
         @Mapping( source = "id", target = "id"),
         @Mapping(source = "paciente.id", target = "paciente_id"),
         @Mapping(source = "medico.id", target = "medico_id"),
-        @Mapping(source = "diagnostico.id", target = "diagnostico_id")
     })
     CitaDto ModelToDTO(CitaModel citaModel);
 

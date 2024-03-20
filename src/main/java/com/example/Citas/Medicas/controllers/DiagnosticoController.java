@@ -27,7 +27,7 @@ public class DiagnosticoController {
     //Método que realiza el guardado de un diagnóstico pasado por parámetro
     //Esta anotación se utiliza para mapear solicitudes HTTP POST.
     @PostMapping
-    public DiagnosticoDto saveDiagnostico(@RequestBody DiagnosticoModel diagnostico){
+    public DiagnosticoDto saveDiagnostico(@RequestBody DiagnosticoDto diagnostico){
         return this.diagnosticoService.saveDiagnostico(diagnostico);
     }
 

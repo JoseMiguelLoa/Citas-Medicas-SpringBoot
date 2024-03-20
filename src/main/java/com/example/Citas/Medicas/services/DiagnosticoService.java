@@ -3,8 +3,11 @@ package com.example.Citas.Medicas.services;
 import com.example.Citas.Medicas.Interfaces.IDiagnostico;
 import com.example.Citas.Medicas.dtos.DiagnosticoDto;
 import com.example.Citas.Medicas.mapper.DiagnosticoMapper;
+import com.example.Citas.Medicas.models.CitaModel;
 import com.example.Citas.Medicas.models.DiagnosticoModel;
+import com.example.Citas.Medicas.repositories.ICitaRepository;
 import com.example.Citas.Medicas.repositories.IDiagnosticoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,9 @@ import java.util.Optional;
 public class DiagnosticoService implements IDiagnostico {
     @Autowired  //Inyección de dependencias
     IDiagnosticoRepository diagnosticoRepository; //Uso del repositorio donde se almacenan los diagnósticos
+
+    @Autowired
+    ICitaRepository citaRepository;
 
     @Autowired
     private DiagnosticoMapper diagnosticoMapper; // Variable del mapper
@@ -33,8 +39,21 @@ public class DiagnosticoService implements IDiagnostico {
      * @param diagnostico (DiagnosticoModel) los datos del diagnóstico
      * @return El diagnóstico guardado
      */
-    public DiagnosticoDto saveDiagnostico(DiagnosticoModel diagnostico){
-        return diagnosticoMapper.ModelToDTO(diagnosticoRepository.save(diagnostico));
+    public DiagnosticoDto saveDiagnostico(DiagnosticoDto diagnostico){
+        DiagnosticoModel diagnosticoModel = diagnosticoMapper.DtoToModel(diagnostico);
+
+        Long cita_id = diagnostico.getCita_id();
+
+        Optional<CitaModel> citaOptional = citaRepository.findById(cita_id);
+
+        if (citaOptional.isPresent()){
+            CitaModel citaModel = citaOptional.get();
+
+            diagnosticoModel.setCita(citaModel);
+
+            return diagnosticoMapper.ModelToDTO(diagnosticoRepository.save(diagnosticoModel));
+        }else
+            throw new EntityNotFoundException( "\nNo se pudo encontrar la cita con el ID: " + cita_id+"\n");
     }
 
     /**

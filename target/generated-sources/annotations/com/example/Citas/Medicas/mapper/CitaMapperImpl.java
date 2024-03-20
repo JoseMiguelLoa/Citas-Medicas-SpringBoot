@@ -2,7 +2,6 @@ package com.example.Citas.Medicas.mapper;
 
 import com.example.Citas.Medicas.dtos.CitaDto;
 import com.example.Citas.Medicas.models.CitaModel;
-import com.example.Citas.Medicas.models.DiagnosticoModel;
 import com.example.Citas.Medicas.models.MedicoModel;
 import com.example.Citas.Medicas.models.PacienteModel;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-18T13:46:01+0100",
+    date = "2024-03-20T11:35:35+0100",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -29,7 +28,6 @@ public class CitaMapperImpl implements CitaMapper {
         citaDto.id( citaModel.getId() );
         citaDto.paciente_id( citaModelPacienteId( citaModel ) );
         citaDto.medico_id( citaModelMedicoId( citaModel ) );
-        citaDto.diagnostico_id( citaModelDiagnosticoId( citaModel ) );
         citaDto.fechaHora( citaModel.getFechaHora() );
         citaDto.motivoCita( citaModel.getMotivoCita() );
         citaDto.attribute11( citaModel.getAttribute11() );
@@ -47,7 +45,6 @@ public class CitaMapperImpl implements CitaMapper {
 
         citaModel.paciente( citaDtoToPacienteModel( citaDto ) );
         citaModel.medico( citaDtoToMedicoModel( citaDto ) );
-        citaModel.diagnostico( citaDtoToDiagnosticoModel( citaDto ) );
         citaModel.id( citaDto.getId() );
         citaModel.fechaHora( citaDto.getFechaHora() );
         citaModel.motivoCita( citaDto.getMotivoCita() );
@@ -114,21 +111,6 @@ public class CitaMapperImpl implements CitaMapper {
         return id;
     }
 
-    private Long citaModelDiagnosticoId(CitaModel citaModel) {
-        if ( citaModel == null ) {
-            return null;
-        }
-        DiagnosticoModel diagnostico = citaModel.getDiagnostico();
-        if ( diagnostico == null ) {
-            return null;
-        }
-        Long id = diagnostico.getId();
-        if ( id == null ) {
-            return null;
-        }
-        return id;
-    }
-
     protected PacienteModel citaDtoToPacienteModel(CitaDto citaDto) {
         if ( citaDto == null ) {
             return null;
@@ -147,17 +129,5 @@ public class CitaMapperImpl implements CitaMapper {
         MedicoModel.MedicoModelBuilder medicoModel = MedicoModel.builder();
 
         return medicoModel.build();
-    }
-
-    protected DiagnosticoModel citaDtoToDiagnosticoModel(CitaDto citaDto) {
-        if ( citaDto == null ) {
-            return null;
-        }
-
-        DiagnosticoModel.DiagnosticoModelBuilder diagnosticoModel = DiagnosticoModel.builder();
-
-        diagnosticoModel.id( citaDto.getDiagnostico_id() );
-
-        return diagnosticoModel.build();
     }
 }

@@ -19,10 +19,10 @@ public class CitaDto {
 
     private int attribute11; //??
 
-    // Realizamos las relaciones de muchos a uno de la tabla paciente, médico y de uno a uno con la tabla diagnóstico
+    // Realizamos las relaciones de muchos a uno de la tabla paciente y médico
     private Long paciente_id;
 
     private Long medico_id;
 
-    private Long diagnostico_id;
+
 }

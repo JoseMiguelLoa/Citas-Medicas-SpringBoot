@@ -4,7 +4,6 @@ import com.example.Citas.Medicas.Interfaces.ICita;
 import com.example.Citas.Medicas.dtos.CitaDto;
 import com.example.Citas.Medicas.mapper.CitaMapper;
 import com.example.Citas.Medicas.models.CitaModel;
-import com.example.Citas.Medicas.models.DiagnosticoModel;
 import com.example.Citas.Medicas.models.MedicoModel;
 import com.example.Citas.Medicas.models.PacienteModel;
 import com.example.Citas.Medicas.repositories.ICitaRepository;
@@ -54,23 +53,21 @@ public class CitaService implements ICita {
         //Declaración de las variables que almacenarán la id de cada uno
         Long medico_id = cita.getMedico_id();
         Long paciente_id = cita.getPaciente_id();
-        Long diagnostico_id = cita.getDiagnostico_id();
+
 
         //Realización de la comprobación de sí está o no el id de cada uno de ellos en sus respectivas tablas
-        Optional<DiagnosticoModel> diagnosticoOptional = diagnosticoRepository.findById(diagnostico_id);
+
         Optional<PacienteModel> pacienteOptional = pacienteRepository.findById(paciente_id);
         Optional<MedicoModel> medicoOptional = medicoRepository.findById(medico_id);
 
-        if ( medicoOptional.isPresent() && pacienteOptional.isPresent() && diagnosticoOptional.isPresent()) {
+        if ( medicoOptional.isPresent() && pacienteOptional.isPresent()) {
             // Si todas las id's existe, asigna el médico, el diagnóstico y el paciente a la cita y guarda la guarda
             MedicoModel medicoModel = medicoOptional.get();
             PacienteModel pacienteModel = pacienteOptional.get();
-            DiagnosticoModel diagnosticoModel = diagnosticoOptional.get();
 
 
             citaModel.setMedico(medicoModel);
             citaModel.setPaciente(pacienteModel);
-            citaModel.setDiagnostico(diagnosticoModel);
 
 
             return citaMapper.ModelToDTO(citaRepository.save(citaModel));
@@ -78,10 +75,6 @@ public class CitaService implements ICita {
             if (pacienteOptional.isEmpty())
                 // Si el paciente no existe, lanza una excepción
                 fallo += "\nNo se pudo encontrar el paciente con el ID: " + paciente_id+"\n";
-
-            if (diagnosticoOptional.isEmpty())
-                // Si el diagnóstico no existe, lanza una excepción
-                fallo += "\nNo se pudo encontrar el diagnóstico con el ID: " + diagnostico_id+"\n";
 
             if (medicoOptional.isEmpty())
                 // Si el médico no existe, lanza una excepción

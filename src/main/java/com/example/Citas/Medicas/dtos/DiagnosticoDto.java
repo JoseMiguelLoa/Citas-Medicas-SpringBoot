@@ -14,4 +14,6 @@ public class DiagnosticoDto {
     private String valoracionEspecialista; //Valoración del especialista en el diagnóstico
 
     private String enfermedad;
+
+    private Long cita_id;
 }

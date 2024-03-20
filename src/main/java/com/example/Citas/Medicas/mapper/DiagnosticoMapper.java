@@ -2,10 +2,7 @@ package com.example.Citas.Medicas.mapper;
 
 import com.example.Citas.Medicas.dtos.DiagnosticoDto;
 import com.example.Citas.Medicas.models.DiagnosticoModel;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -13,7 +10,10 @@ import java.util.List;
 public interface DiagnosticoMapper {
 
     //Método que realiza el cambio de Entidad a Dto de Diagnóstico
-    @Mapping( source = "id", target = "id")
+    @Mappings({
+            @Mapping( source = "id", target = "id"),
+            @Mapping(source = "cita.id", target = "cita_id"),
+    })
     DiagnosticoDto ModelToDTO(DiagnosticoModel diagnosticoModel);
 
     //Método que realiza el cambio de Dto a Entidad de Diagnóstico

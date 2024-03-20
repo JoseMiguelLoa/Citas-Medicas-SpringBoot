@@ -25,6 +25,7 @@ public class DiagnosticoModel  {
     private String enfermedad;
 
 
-    @OneToOne(mappedBy = "diagnostico")
+    @OneToOne
+    @JoinColumn(name = "cita_id", referencedColumnName = "id" )
     private CitaModel cita;
 }

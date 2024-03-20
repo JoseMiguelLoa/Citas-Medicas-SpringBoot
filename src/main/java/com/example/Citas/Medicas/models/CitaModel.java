@@ -43,8 +43,7 @@ public class CitaModel {
     private MedicoModel medico;
 
 
-    @OneToOne( cascade = CascadeType.ALL)
-    @JoinColumn(name = "diagnostico_id", referencedColumnName = "id" )
+    @OneToOne( mappedBy = "cita", cascade = CascadeType.ALL)
     private DiagnosticoModel diagnostico;
 
 }

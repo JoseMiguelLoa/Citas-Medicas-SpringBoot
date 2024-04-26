@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-20T11:35:35+0100",
+    date = "2024-04-26T12:45:42+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -25,7 +25,7 @@ public class DiagnosticoMapperImpl implements DiagnosticoMapper {
         DiagnosticoDto.DiagnosticoDtoBuilder diagnosticoDto = DiagnosticoDto.builder();
 
         diagnosticoDto.id( diagnosticoModel.getId() );
-        diagnosticoDto.cita_id( diagnosticoModelCitaId( diagnosticoModel ) );
+        diagnosticoDto.citaId( diagnosticoModelCitaId( diagnosticoModel ) );
         diagnosticoDto.valoracionEspecialista( diagnosticoModel.getValoracionEspecialista() );
         diagnosticoDto.enfermedad( diagnosticoModel.getEnfermedad() );
 
@@ -98,7 +98,7 @@ public class DiagnosticoMapperImpl implements DiagnosticoMapper {
 
         CitaModel.CitaModelBuilder citaModel = CitaModel.builder();
 
-        citaModel.id( diagnosticoDto.getCita_id() );
+        citaModel.id( diagnosticoDto.getCitaId() );
 
         return citaModel.build();
     }

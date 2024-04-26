@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-20T11:35:35+0100",
+    date = "2024-04-26T12:45:42+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -26,8 +26,8 @@ public class CitaMapperImpl implements CitaMapper {
         CitaDto.CitaDtoBuilder citaDto = CitaDto.builder();
 
         citaDto.id( citaModel.getId() );
-        citaDto.paciente_id( citaModelPacienteId( citaModel ) );
-        citaDto.medico_id( citaModelMedicoId( citaModel ) );
+        citaDto.pacienteId( citaModelPacienteId( citaModel ) );
+        citaDto.medicoId( citaModelMedicoId( citaModel ) );
         citaDto.fechaHora( citaModel.getFechaHora() );
         citaDto.motivoCita( citaModel.getMotivoCita() );
         citaDto.attribute11( citaModel.getAttribute11() );

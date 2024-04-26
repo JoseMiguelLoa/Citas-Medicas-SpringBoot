@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/MedPac") //Introducimos una ruta para los métodos
+@RequestMapping("MedPac/") //Introducimos una ruta para los métodos
 public class MedicoPacienteController {
 
     @Autowired //Inyección de dependencias
     private MedicoPacienteService medicoPacienteService;
 
-    @PostMapping(path = "/{idM}/{idP}")
+    @PostMapping(path = "{idM}/{idP}")
     public String savePacienteMedico(@PathVariable("idM") Long idM, @PathVariable("idP") Long idP){
         return this.medicoPacienteService.savePacienteMedico(idM,idP);
     }

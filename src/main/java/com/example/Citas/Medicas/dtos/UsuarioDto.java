@@ -22,5 +22,5 @@ public class UsuarioDto {
     private String usuario; //Nombre del perfil del usuario
 
 
-    private String clave; //contraseña del usuario
+
 }

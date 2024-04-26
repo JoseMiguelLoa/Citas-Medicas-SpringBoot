@@ -15,5 +15,5 @@ public class DiagnosticoDto {
 
     private String enfermedad;
 
-    private Long cita_id;
+    private Long citaId;
 }

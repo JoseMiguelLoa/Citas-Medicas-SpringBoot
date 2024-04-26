@@ -26,6 +26,6 @@ public class DiagnosticoModel  {
 
 
     @OneToOne
-    @JoinColumn(name = "cita_id", referencedColumnName = "id" )
+    @JoinColumn(name = "citaId", referencedColumnName = "id" )
     private CitaModel cita;
 }

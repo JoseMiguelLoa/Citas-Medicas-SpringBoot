@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Medico") //Introducimos una ruta para los métodos
+@RequestMapping("Medico/") //Introducimos una ruta para los métodos
 public class MedicoController {
 
     @Autowired //Inyección de dependencias
@@ -32,7 +32,7 @@ public class MedicoController {
     }
 
     //  Método que realiza la búsqueda de un médico que tenga la misma id pasada por parámetro
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "{id}")
     public Optional<MedicoDto> getMedicoById(@PathVariable Long id){
 
         return this.medicoService.getById(id);
@@ -41,7 +41,7 @@ public class MedicoController {
 
     // Método que realiza la actualización de los campos que se hayan pasado más el id para definir que médico es
     //Esta anotación se utiliza para mapear solicitudes HTTP PUT.
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "{id}")
     public MedicoDto updateMedicoById(@RequestBody MedicoModel request, @PathVariable("id") Long id){
         return this.medicoService.updateById(request, id);
     }
@@ -49,7 +49,7 @@ public class MedicoController {
 
     //Borra el médico pasado por parámetro
     //Esta anotación se utiliza para mapear solicitudes HTTP DELETE.
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "{id}")
     public String deleteMedicoById(@PathVariable("id") Long id){
         boolean ok = this.medicoService.deleteMedico(id);
 

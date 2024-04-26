@@ -33,13 +33,13 @@ public class CitaModel {
 
     // Realizamos las relaciones de muchos a uno de la tabla paciente, médico y diagnóstico
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "pacienteId")
     private PacienteModel paciente;
 
 
 
     @ManyToOne
-    @JoinColumn(name = "medico_id")
+    @JoinColumn(name = "medicoId")
     private MedicoModel medico;
 
 

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Diagnostico") //Introducimos una ruta para los métodos
+@RequestMapping("Diagnostico/") //Introducimos una ruta para los métodos
 public class DiagnosticoController {
 
     @Autowired //Inyección de dependencias
@@ -32,7 +32,7 @@ public class DiagnosticoController {
     }
 
     //  Método que realiza la búsqueda de un diagnóstico que tenga la misma id pasada por parámetro
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "{id}")
     public Optional<DiagnosticoDto> getDiagnosticoById(@PathVariable Long id){
 
         return this.diagnosticoService.getById(id);
@@ -40,14 +40,14 @@ public class DiagnosticoController {
 
 
     // Método que realiza la actualización de los campos que se hayan pasado más el id para definir que diagnóstico es
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "{id}")
     public DiagnosticoDto updateDiagnosticoById(@RequestBody DiagnosticoModel request, @PathVariable("id") Long id){
         return this.diagnosticoService.updateById(request, id);
     }
 
 
     //Borra el diagnóstico pasado por parámetro
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "{id}")
     public String deleteDiagnosticoById(@PathVariable("id") Long id){
         boolean ok = this.diagnosticoService.deleteDiagnostico(id);
 

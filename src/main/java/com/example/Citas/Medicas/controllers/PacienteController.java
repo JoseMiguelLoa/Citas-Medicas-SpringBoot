@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Paciente") //Introducimos una ruta para los métodos
+@RequestMapping("Paciente/") //Introducimos una ruta para los métodos
 public class PacienteController {
 
 
@@ -33,7 +33,7 @@ public class PacienteController {
     }
 
     //  Método que realiza la búsqueda de un paciente que tenga la misma id pasada por parámetro
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "{id}")
     public Optional<PacienteDto> getPacienteById(@PathVariable Long id){
 
         return this.pacienteService.getById(id);
@@ -41,14 +41,14 @@ public class PacienteController {
 
     // Método que realiza la actualización de los campos que se hayan pasado más el id para definir que paciente es
     //Esta anotación se utiliza para mapear solicitudes HTTP PUT.
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "{id}")
     public PacienteDto updatePacienteById(@RequestBody PacienteModel request, @PathVariable("id") Long id){
         return this.pacienteService.updateById(request, id);
     }
 
     //Borra el paciente pasado por parámetro
     //Esta anotación se utiliza para mapear solicitudes HTTP DELETE.
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "{id}")
     public String deletePacienteById(@PathVariable("id") Long id){
         boolean ok = this.pacienteService.deletePaciente(id);
 

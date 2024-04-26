@@ -12,7 +12,7 @@ public interface DiagnosticoMapper {
     //Método que realiza el cambio de Entidad a Dto de Diagnóstico
     @Mappings({
             @Mapping( source = "id", target = "id"),
-            @Mapping(source = "cita.id", target = "cita_id"),
+            @Mapping(source = "cita.id", target = "citaId"),
     })
     DiagnosticoDto ModelToDTO(DiagnosticoModel diagnosticoModel);
 

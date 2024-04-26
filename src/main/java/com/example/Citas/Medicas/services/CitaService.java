@@ -51,14 +51,14 @@ public class CitaService implements ICita {
         String fallo = "";//String el cual almacenara en caso de haber fallos cuáles son
         CitaModel citaModel = citaMapper.DtoToModel(cita);
         //Declaración de las variables que almacenarán la id de cada uno
-        Long medico_id = cita.getMedico_id();
-        Long paciente_id = cita.getPaciente_id();
+        Long medicoId = cita.getMedicoId();
+        Long pacienteId = cita.getPacienteId();
 
-
+        
         //Realización de la comprobación de sí está o no el id de cada uno de ellos en sus respectivas tablas
 
-        Optional<PacienteModel> pacienteOptional = pacienteRepository.findById(paciente_id);
-        Optional<MedicoModel> medicoOptional = medicoRepository.findById(medico_id);
+        Optional<PacienteModel> pacienteOptional = pacienteRepository.findById(pacienteId);
+        Optional<MedicoModel> medicoOptional = medicoRepository.findById(medicoId);
 
         if ( medicoOptional.isPresent() && pacienteOptional.isPresent()) {
             // Si todas las id's existe, asigna el médico, el diagnóstico y el paciente a la cita y guarda la guarda
@@ -74,11 +74,11 @@ public class CitaService implements ICita {
         } else{
             if (pacienteOptional.isEmpty())
                 // Si el paciente no existe, lanza una excepción
-                fallo += "\nNo se pudo encontrar el paciente con el ID: " + paciente_id+"\n";
+                fallo += "\nNo se pudo encontrar el paciente con el ID: " + pacienteId+"\n";
 
             if (medicoOptional.isEmpty())
                 // Si el médico no existe, lanza una excepción
-                fallo += "\nNo se pudo encontrar el médico con el ID: " + medico_id+"\n";
+                fallo += "\nNo se pudo encontrar el médico con el ID: " + medicoId+"\n";
 
 
             throw new EntityNotFoundException(fallo);
@@ -99,8 +99,11 @@ public class CitaService implements ICita {
         CitaModel cita;
         if (citaRepository.findById(id).isPresent())
             cita =  citaRepository.findById(id).get();
-        else
-            cita = null;
+        else{
+            throw new EntityNotFoundException("No se ha encontrado la cita");
+
+        }
+
 
         CitaDto citaDto = citaMapper.ModelToDTO(cita);
         return Optional.ofNullable(citaDto);

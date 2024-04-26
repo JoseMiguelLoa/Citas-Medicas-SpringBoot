@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Cita") //Introducimos una ruta para los métodos
+@RequestMapping("Cita/") //Introducimos una ruta para los métodos
 public class CitaController {
 
     @Autowired //Inyección de dependencias
@@ -32,7 +32,7 @@ public class CitaController {
 
 
     //  Método que realiza la búsqueda de una cita que tenga la misma id pasada por parámetro
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "{id}")
     public Optional<CitaDto> getCitaById(@PathVariable Long id){
 
         return this.citaService.getById(id);
@@ -41,7 +41,7 @@ public class CitaController {
 
     // Método que realiza la actualización de los campos que se hayan pasado más id para definir que cita es
     //Esta anotación se utiliza para mapear solicitudes HTTP PUT.
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "{id}")
     public CitaDto updateCitaById(@RequestBody CitaModel request, @PathVariable("id") Long id){
         return this.citaService.updateById(request, id);
     }
@@ -49,7 +49,7 @@ public class CitaController {
 
     //Borra la cita pasada por parámetro
     //Esta anotación se utiliza para mapear solicitudes HTTP DELETE.
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "{id}")
     public String deleteCitaById(@PathVariable("id") Long id){
         boolean ok = this.citaService.deleteCita(id);
 

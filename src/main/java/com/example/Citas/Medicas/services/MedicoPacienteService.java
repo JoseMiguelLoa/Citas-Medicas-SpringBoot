@@ -44,12 +44,12 @@ public class MedicoPacienteService implements IMedicoPaciente {
 
 
         //Declaración de las variables que almacenarán la id de cada uno
-        Long medico_id = idM;
-        Long paciente_id = idP;
+        Long medicoId = idM;
+        Long pacienteId = idP;
 
         //Realización de la comprobación de sí está o no el id de cada uno de ellos en sus respectivas tablas
-        Optional<PacienteModel> pacienteOptional = pacienteRepository.findById(paciente_id);
-        Optional<MedicoModel> medicoOptional = medicoRepository.findById(medico_id);
+        Optional<PacienteModel> pacienteOptional = pacienteRepository.findById(pacienteId);
+        Optional<MedicoModel> medicoOptional = medicoRepository.findById(medicoId);
 
         if (medicoOptional.isPresent() && pacienteOptional.isPresent()) {
 
@@ -78,12 +78,12 @@ public class MedicoPacienteService implements IMedicoPaciente {
         } else {
             if (pacienteOptional.isEmpty())
                 // Si el paciente no existe, lanza una excepción
-                fallo += "\nNo se pudo encontrar el paciente con el ID: " + paciente_id + "\n";
+                fallo += "\nNo se pudo encontrar el paciente con el ID: " + pacienteId + "\n";
 
 
             if (medicoOptional.isEmpty())
                 // Si el médico no existe, lanza una excepción
-                fallo += "\nNo se pudo encontrar el médico con el ID: " + medico_id + "\n";
+                fallo += "\nNo se pudo encontrar el médico con el ID: " + medicoId + "\n";
 
             return fallo;
         }

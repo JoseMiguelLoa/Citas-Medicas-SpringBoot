@@ -42,9 +42,9 @@ public class DiagnosticoService implements IDiagnostico {
     public DiagnosticoDto saveDiagnostico(DiagnosticoDto diagnostico){
         DiagnosticoModel diagnosticoModel = diagnosticoMapper.DtoToModel(diagnostico);
 
-        Long cita_id = diagnostico.getCita_id();
+        Long citaId = diagnostico.getCitaId();
 
-        Optional<CitaModel> citaOptional = citaRepository.findById(cita_id);
+        Optional<CitaModel> citaOptional = citaRepository.findById(citaId);
 
         if (citaOptional.isPresent()){
             CitaModel citaModel = citaOptional.get();
@@ -53,7 +53,7 @@ public class DiagnosticoService implements IDiagnostico {
 
             return diagnosticoMapper.ModelToDTO(diagnosticoRepository.save(diagnosticoModel));
         }else
-            throw new EntityNotFoundException( "\nNo se pudo encontrar la cita con el ID: " + cita_id+"\n");
+            throw new EntityNotFoundException( "\nNo se pudo encontrar la cita con el ID: " + citaId+"\n");
     }
 
     /**
@@ -66,7 +66,7 @@ public class DiagnosticoService implements IDiagnostico {
         if (diagnosticoRepository.findById(id).isPresent())
             diagnostico =  diagnosticoRepository.findById(id).get();
         else
-            diagnostico = null;
+            throw new EntityNotFoundException("No se ha encontrado el diagnóstico");
 
         DiagnosticoDto diagnosticoDto = diagnosticoMapper.ModelToDTO(diagnostico);
         return Optional.ofNullable(diagnosticoDto);

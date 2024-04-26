@@ -34,19 +34,19 @@ public class UsuarioController {
 
 
     //  Método que realiza la búsqueda de un usuario que tenga la misma id pasada por parámetro
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "{id}")
     public Optional<UsuarioDto> getUsuarioById(@PathVariable Long id){
         return this.usuarioService.getById(id);
     }
 
     // Método que realiza la actualización de los campos que se hayan pasado más el id para definir que usuario es
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "{id}")
     public UsuarioDto updateUsuarioById(@RequestBody UsuarioModel request, @PathVariable("id") Long id){
         return this.usuarioService.updateById(request, id);
     }
 
     //Borra el usuario pasado por parámetro
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "{id}")
     public String deleteUsuarioById(@PathVariable("id") Long id){
         boolean ok = this.usuarioService.deleteUsuario(id);
 

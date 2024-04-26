@@ -12,8 +12,8 @@ public interface CitaMapper {
     //Método que realiza el cambio de Entidad a Dto de Cita
     @Mappings({
         @Mapping( source = "id", target = "id"),
-        @Mapping(source = "paciente.id", target = "paciente_id"),
-        @Mapping(source = "medico.id", target = "medico_id"),
+        @Mapping(source = "paciente.id", target = "pacienteId"),
+        @Mapping(source = "medico.id", target = "medicoId"),
     })
     CitaDto ModelToDTO(CitaModel citaModel);
 

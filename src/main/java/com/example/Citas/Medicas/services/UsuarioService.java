@@ -5,6 +5,7 @@ import com.example.Citas.Medicas.dtos.UsuarioDto;
 import com.example.Citas.Medicas.mapper.UsuarioMapper;
 import com.example.Citas.Medicas.models.UsuarioModel;
 import com.example.Citas.Medicas.repositories.IUsuarioRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class UsuarioService implements IUsuario {
         if (usuarioRepository.findById(id).isPresent())
              usuario =  usuarioRepository.findById(id).get();
         else
-            usuario = null;
+            throw new EntityNotFoundException("No se ha encontrado el usuario");
 
         UsuarioDto usuarioDto = usuarioMapper.ModelToDTO(usuario);
         return Optional.ofNullable(usuarioDto);

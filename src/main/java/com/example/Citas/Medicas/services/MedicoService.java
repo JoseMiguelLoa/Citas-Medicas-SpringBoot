@@ -56,7 +56,8 @@ public class MedicoService  implements IMedico {
         if (medicoRepository.findById(id).isPresent())
             medico = medicoRepository.findById(id).get();
         else
-            medico = null;
+            throw new EntityNotFoundException("No se ha encontrado el médico");
+
         MedicoDto medicoDto = medicoMapper.ModelToDTO(medico);
         return Optional.ofNullable(medicoDto);
     }

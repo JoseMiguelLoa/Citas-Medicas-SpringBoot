@@ -22,7 +22,7 @@ public class MedicoModel extends UsuarioModel{
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "medico_paciente", joinColumns = @JoinColumn( name = "medico_Id" , referencedColumnName = "idU"),
-            inverseJoinColumns = @JoinColumn( name = "paciente_id",referencedColumnName = "idU")
+            inverseJoinColumns = @JoinColumn( name = "pacienteId",referencedColumnName = "idU")
     )
     private List<PacienteModel> pacientes; //Creamos una variable para crear la relación de muchos a muchos com pacientes
 

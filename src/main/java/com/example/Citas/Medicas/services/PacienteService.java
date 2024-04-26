@@ -60,7 +60,7 @@ public class PacienteService implements IPaciente {
         if (pacienteRepository.findById(id).isPresent())
             paciente =  pacienteRepository.findById(id).get();
         else
-            paciente = null;
+            throw new EntityNotFoundException("No se ha encontrado el paciente");
 
         PacienteDto pacienteDto = pacienteMapper.ModelToDTO(paciente);
         return Optional.ofNullable(pacienteDto);
